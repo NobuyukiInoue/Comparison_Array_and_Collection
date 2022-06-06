@@ -3,7 +3,7 @@
 Excel VBAにおけるコレクションと（動的）配列の処理速度を比較するExcelブックです。<BR>
 (Excel VBA Comparison of Collection and Dynamic Array processing speed.)
 
-## ファイルの説明
+## ファイルの説明（主なもの）
 
 - Comparison_Array_and_Collection.xlsm<BR>
 
@@ -11,21 +11,26 @@ Excel VBAにおけるコレクションと（動的）配列の処理速度を�
 Excelファイル形式のままだと、VBAのコードを直接開くことができませんので、
 使用したコードを含む主なモジュールは、ExportModulesディレクトリに書き出しています。
 
-配列またはコレクションに読み込むデータは、サンプルのcsvファイルを使用します。
+配列またはCollectionに読み込むデータは、サンプルのcsvファイルを使用します。
 
-- ExportModules/Sheet1.cls
-  操作用メインシートです。
-  （動的）配列およびCollectionへの読み込みおよび、イミディエイトウインドウへの書き出し処理を呼び出すボタンが配置されています。
+- [ExportModules/Sheet1.cls](https://github.com/NobuyukiInoue/Comparison_Array_and_Collection/blob/main/ExportModules/Sheet1.cls)<br>
+  操作用メインシートです。<BR>
+  （動的）配列およびCollectionへの読み込みおよび、イミディエイトウインドウへの書き出し処理を呼び出すボタンが配置されています。<BR>
+  処理時間にはばらつきがあるため、（デフォルトでは）同じ処理を５回繰り返します。<BR>
   計測した処理時間についても、このシートに書き出されます。
 
-- ExportModules/M_OperateArray.cls<BR>
-（動的）配列を格納する構造体および各種操作関数群
+- [ExportModules/M_OperateArray.bas](https://github.com/NobuyukiInoue/Comparison_Array_and_Collection/blob/main/ExportModules/M_OperateArray.bas)<BR>
+（動的）配列を格納する構造体および各種操作関数群です。
 
-- ExportModules/ClassArray.cls<BR>
-上記の（動的）配列処理をクラス化したもの
+- [ExportModules/ClassArray.cls](https://github.com/NobuyukiInoue/Comparison_Array_and_Collection/blob/main/ExportModules/ClassArray.cls)<BR>
+上記の（動的）配列処理をクラス化したものです。
+
+- [M_OperateCollection.bas](https://github.com/NobuyukiInoue/Comparison_Array_and_Collection/blob/main/ExportModules/M_OperateCollection.bas)<BR>
+Collection使用時の読み込み・書き出し処理をまとめたものです。
 
 - slist20220531.csv<BR>
-実験用のサンプルファイル(ファイルサイズ 11,042,966 Byte)
+実験用のサンプルファイルです。<BR>
+ファイルサイズは、11,042,966 Byte（約11MByte）あります。
 
 ---
 
@@ -42,7 +47,10 @@ Excelファイル形式のままだと、VBAのコードを直接開くことが
 
 ## 結果１(CPUキャッシュされず)
 
-通常時の実行結果(slist20220531.csvがCPUキャッシュメモリ上にない場合)
+通常時の実行結果(配列/CollectionデータがCPUキャッシュメモリ上にない場合)
+
+ファイルから配列およびCollectionへの読み込みについては、処理時間はほぼ変わらずでした。
+イミディエイトウインドウへの書き出し（配列/Collectionからの取り出し）については、（動的）配列の方が処理時間が短い結果となりました。
 
 ### Array(Struct)
 | |読み込み処理時間（合計）(s)|読み込み処理時間(s)|書き出し処理時間(s)|
@@ -79,7 +87,10 @@ Excelファイル形式のままだと、VBAのコードを直接開くことが
 
 ## 結果２(CPUキャッシュ時)
 
-slist20220531.csvがCPUキャッシュメモリ上にあると思われるときの実行結果
+配列/CollectionデータがCPUキャッシュメモリ上にあると思われるときの実行結果
+
+ファイルから配列およびCollectionへの読み込みについては、処理時間はほぼ変わらずでした。
+イミディエイトウインドウへの書き出し（配列/Collectionからの取り出し）については、（動的）配列の方が処理時間が短い結果となりました。
 
 ### Array(Struct)
 | |読み込み処理時間（合計）(s)|読み込み処理時間(s)|書き出し処理時間(s)|
