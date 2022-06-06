@@ -1,6 +1,6 @@
 # Excel VBA Comparison Array and Collection.
 
-Excel VBAにおけるコレクションと（動的）配列の処理速度を比較するExcelブックです。<BR>
+Excel VBAにおける（動的）配列とCollectionの処理速度を比較するExcelブックです。<BR>
 (Excel VBA Comparison of Collection and Dynamic Array processing speed.)
 
 ## ファイルの説明（主なもの）
@@ -14,7 +14,7 @@ Excelファイル形式のままだと、VBAのコードを直接開くことが
 配列またはCollectionに読み込むデータは、サンプルのcsvファイルを使用します。
 
 - [ExportModules/Sheet1.cls](https://github.com/NobuyukiInoue/Comparison_Array_and_Collection/blob/main/ExportModules/Sheet1.cls)<br>
-  操作用メインシートです。<BR>
+  Sheet1（操作用シート）のコード部です。<BR>
   （動的）配列およびCollectionへの読み込みおよび、イミディエイトウインドウへの書き出し処理を呼び出すボタンが配置されています。<BR>
   処理時間にはばらつきがあるため、（デフォルトでは）同じ処理を５回繰り返します。<BR>
   計測した処理時間についても、このシートに書き出されます。
