@@ -8,19 +8,19 @@ Public Function CollectionFileLoad(fileNamePath As String) As Collection
     Dim lines As Collection
     Set lines = New Collection
     
-    Dim fp As Long
-    fp = FreeFile()
+    Dim fileNum As Long
+    fileNum = FreeFile()
     
-    Open fileNamePath For Input As #fp
+    Open fileNamePath For Input As #fileNum
 
     Dim buf As String
-    Do While Not EOF(fp)
+    Do While Not EOF(fileNum)
         If lines.Count Mod 1000 = 0 Then
             Application.StatusBar = "ì«Ç›çûÇ›íÜ ...(" & lines.Count & "çsñ⁄)"
             DoEvents
         End If
         
-        Line Input #fp, buf
+        Line Input #fileNum, buf
         lines.Add buf
     Loop
     

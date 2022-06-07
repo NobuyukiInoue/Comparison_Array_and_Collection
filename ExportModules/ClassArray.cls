@@ -67,19 +67,19 @@ End Sub
 ' ファイルをReadArrayに読み込む
 '------------------------------------------------------------------------------
 Public Sub ArrayFileLoad(fileNamePath As String)
-    Dim fp As Long
-    fp = FreeFile()
+    Dim fileNum As Long
+    fileNum = FreeFile()
     
-    Open fileNamePath For Input As #fp
+    Open fileNamePath For Input As #fileNum
 
     Dim buf As String
-    Do While Not EOF(fp)
+    Do While Not EOF(fileNum)
         If Count Mod 1000 = 0 Then
             Application.StatusBar = "読み込み中 ...(" & Count & "行目)"
             DoEvents
         End If
     
-        Line Input #fp, buf
+        Line Input #fileNum, buf
         AddItem (buf)
     Loop
 End Sub
