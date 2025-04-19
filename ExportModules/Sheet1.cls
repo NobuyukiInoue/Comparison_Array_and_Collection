@@ -199,7 +199,7 @@ Private Sub CommandButton21_Click()
         
         ' ファイル読み込み
         Set ca = New ClassArray
-        ca.ArrayFileLoad (fileNamePath)
+        ca.ArrayFileLoad fileNamePath, "UTF-8", vbCrLf
         
         ' 現在の日付時刻取得
         T_WR.Cells(1 + i, 6).value = MyGetSystemTime
@@ -258,7 +258,7 @@ Private Sub CommandButton22_Click()
         
         ' ファイル読み込み
         Set ca = New ClassArray
-        ca.ArrayFileLoad (fileNamePath)
+        ca.ArrayFileLoad fileNamePath, "UTF-8", vbCrLf
         
         ' 現在の日付時刻取得
         T_WR.Cells(1 + i, 6).value = MyGetSystemTime

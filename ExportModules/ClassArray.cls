@@ -64,9 +64,49 @@ Public Sub RemoveItem(index As Long)
 End Sub
 
 '------------------------------------------------------------------------------
-' ファイルをReadArrayに読み込む
+' ファイルをReadArrayに読み込む(ADODB版)
+'
+' ☆code(.Chrset)の値
+' "SJIS", "UTF-8"
+'
+' ☆separator(.LineSeparator)の値
+' -------+---+-------------------------------
+' 定数    値  説明
+' -------+---+-------------------------------
+' adCR    13  復帰を示します。
+' adCRLF  -1  既定値。復帰改行を示します。
+' adLF    10  改行を示します。
+' -------+-----------------------------------
+'
 '------------------------------------------------------------------------------
-Public Sub ArrayFileLoad(fileNamePath As String)
+Public Sub ArrayFileLoad(fileName As String, code As String, separator As String)
+    With CreateObject("ADODB.Stream")
+        .Charset = code
+    
+        Select Case separator
+        Case vbLf:
+            .lineSeparator = 10
+        Case vbCr:
+            .lineSeparator = 13
+        Case Else:
+            .lineSeparator = -1
+        End Select
+        
+        .Open
+        .LoadFromFile fileName
+        
+        Do Until .EOS
+            AddItem .ReadText(-2) ' １行取り出す
+        Loop
+        
+        .Close
+    End With
+End Sub
+    
+'------------------------------------------------------------------------------
+' ファイルをReadArrayに読み込む（ファイルオープン版）
+'------------------------------------------------------------------------------
+Public Sub ArrayFileLoad_normal(fileNamePath As String)
     Dim fileNum As Long
     fileNum = FreeFile()
     
