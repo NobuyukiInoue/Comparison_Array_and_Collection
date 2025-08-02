@@ -3,6 +3,11 @@
 Excel VBAにおける（動的）配列とCollectionの処理速度を比較です。<BR>
 (Excel VBA Comparison of Collection and Dynamic Array processing speed.)
 
+
+解説記事）VBA （動的）配列とCollectionの処理速度比較とClass化<BR>
+https://qiita.com/gx3n-inue/items/3e29fc829bb1cca66f55<BR>
+
+
 ## ファイルの説明（主なもの）
 
 - Comparison_Array_and_Collection.xlsm<BR>
