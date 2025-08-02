@@ -402,6 +402,122 @@ Private Sub CommandButton32_Click()
 End Sub
 
 '------------------------------------------------------------------------------
+' 「読み込み・取り出し(Dictionary)」ボタンをクリック
+'------------------------------------------------------------------------------
+Private Sub CommandButton41_Click()
+    Dim filePath As String
+    Dim fileName As String
+    Dim fileNamePath As String
+    Dim loopCount As Long
+
+    filePath = Replace(Range("C2").value, ".", ActiveWorkbook.Path)
+    fileName = Range("C3").value
+    fileNamePath = filePath & "\" & fileName
+    loopCount = Range("C4").value
+    Application.Cursor = xlWait
+    
+    Dim T_WR As Range
+    Set T_WR = Range("B38")
+    
+    CellsSetting T_WR, loopCount, "Dictionary - Load/Read", "読み出し"
+    
+    Dim lines As Object
+    Dim i As Long
+    For i = 1 To loopCount
+        T_WR.Cells(1 + i, 1).value = i & "回目"
+        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "処理中..."
+        
+        ' 現在の日付時刻取得
+        T_WR.Cells(1 + i, 5).value = MyGetSystemTime
+        
+        ' ファイル読み込み
+        Set lines = DictionaryFileLoad(fileNamePath, "UTF-8", vbCrLf)
+        
+        ' 現在の日付時刻取得
+        T_WR.Cells(1 + i, 6).value = MyGetSystemTime
+        
+        ' 読み込み処理時間を出力
+        T_WR.Cells(1 + i, 3).value = (T_WR.Cells(1 + i, 6).value - T_WR.Cells(1 + i, 5).value) * (60 * 60 * 24#)
+        
+        ' イミディエイトウインドウに出力
+        DictionaryPrint lines
+        
+        ' 現在の日付時刻取得
+        T_WR.Cells(1 + i, 7).value = MyGetSystemTime
+        
+        ' 読み出し処理時間を出力
+        T_WR.Cells(1 + i, 4).value = (T_WR.Cells(1 + i, 7).value - T_WR.Cells(1 + i, 6).value) * (60 * 60 * 24#)
+        
+        ' 合計時間を出力
+        T_WR.Cells(1 + i, 2).value = T_WR.Cells(1 + i, 3).value + T_WR.Cells(1 + i, 4).value
+    
+    Next
+
+    Application.StatusBar = False
+    Application.Cursor = xlDefault
+    
+    MsgBox "処理が終わりました"
+
+End Sub
+
+'------------------------------------------------------------------------------
+' 「読み込み・先頭要素を削除(Dictionary)」ボタンをクリック
+'------------------------------------------------------------------------------
+Private Sub CommandButton42_Click()
+    Dim filePath As String
+    Dim fileName As String
+    Dim fileNamePath As String
+    Dim loopCount As Long
+
+    filePath = Replace(Range("C2").value, ".", ActiveWorkbook.Path)
+    fileName = Range("C3").value
+    fileNamePath = filePath & "\" & fileName
+    loopCount = Range("C4").value
+    Application.Cursor = xlWait
+    
+    Dim T_WR As Range
+    Set T_WR = Range("J38")
+    
+    CellsSetting T_WR, loopCount, "Dictionary - Load/Remove", "先頭削除"
+    
+    Dim lines As Object
+    Dim i As Long
+    For i = 1 To loopCount
+        T_WR.Cells(1 + i, 1).value = i & "回目"
+        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "処理中..."
+        
+        ' 現在の日付時刻取得
+        T_WR.Cells(1 + i, 5).value = MyGetSystemTime
+        
+        ' ファイル読み込み
+        Set lines = DictionaryFileLoad(fileNamePath, "UTF-8", vbCrLf)
+        
+        ' 現在の日付時刻取得
+        T_WR.Cells(1 + i, 6).value = MyGetSystemTime
+        
+        ' 読み込み処理時間を出力
+        T_WR.Cells(1 + i, 3).value = (T_WR.Cells(1 + i, 6).value - T_WR.Cells(1 + i, 5).value) * (60 * 60 * 24#)
+        
+        ' 先頭の要素を削除
+        lines.Remove (1)
+        
+        ' 現在の日付時刻取得
+        T_WR.Cells(1 + i, 7).value = MyGetSystemTime
+        
+        ' 読み出し処理時間を出力
+        T_WR.Cells(1 + i, 4).value = (T_WR.Cells(1 + i, 7).value - T_WR.Cells(1 + i, 6).value) * (60 * 60 * 24#)
+        
+        ' 合計時間を出力
+        T_WR.Cells(1 + i, 2).value = T_WR.Cells(1 + i, 3).value + T_WR.Cells(1 + i, 4).value
+    Next
+
+    Application.StatusBar = False
+    Application.Cursor = xlDefault
+    
+    MsgBox "処理が終わりました"
+End Sub
+
+'------------------------------------------------------------------------------
 ' シートがアクティブになったとき
 '------------------------------------------------------------------------------
 Private Sub Worksheet_Activate()
@@ -411,10 +527,12 @@ Private Sub Worksheet_Activate()
     セルの位置に合わせる CommandButton11, Range("C6:D7")
     セルの位置に合わせる CommandButton21, Range("C6:D7").Offset((5 + loopCount) * 1, 0)
     セルの位置に合わせる CommandButton31, Range("C6:D7").Offset((5 + loopCount) * 2, 0)
+    セルの位置に合わせる CommandButton41, Range("C6:D7").Offset((5 + loopCount) * 3, 0)
 
     セルの位置に合わせる CommandButton12, Range("K6:L7")
     セルの位置に合わせる CommandButton22, Range("K6:L7").Offset((5 + loopCount) * 1, 0)
     セルの位置に合わせる CommandButton32, Range("K6:L7").Offset((5 + loopCount) * 2, 0)
+    セルの位置に合わせる CommandButton42, Range("K6:L7").Offset((5 + loopCount) * 3, 0)
 
 End Sub
 
