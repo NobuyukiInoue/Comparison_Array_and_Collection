@@ -1,4 +1,4 @@
-Attribute VB_Name = "M_OperateDateTime"
+ï»¿Attribute VB_Name = "M_OperateDateTime"
 Option Explicit
 
 #If VBA7 And Win64 Then
@@ -8,7 +8,7 @@ Option Explicit
 #End If
 
 '------------------------------------------------------------------------------
-' SYSTEMTIME\‘¢‘Ì
+' SYSTEMTIMEæ§‹é€ ä½“
 '------------------------------------------------------------------------------
 Type SYSTEMTIME
     sYear As Integer
@@ -22,16 +22,16 @@ Type SYSTEMTIME
 End Type
 
 '------------------------------------------------------------------------------
-' Œ»İ‚Ì“ú•t‚ğ•Ô‚·
+' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»ã‚’è¿”ã™
 '------------------------------------------------------------------------------
 Public Function MyGetSystemTime() As String
     Dim sysTime As SYSTEMTIME
     Dim timeStr As String
     
-    '// Œ»İ“úæ“¾
+    '// ç¾åœ¨æ—¥æ™‚å–å¾—
     Call GetLocalTime(sysTime)
     
-    '// yyyy/mm/dd hh:mm:ss.fff‚É®Œ`
+    '// yyyy/mm/dd hh:mm:ss.fffã«æ•´å½¢
     timeStr = Format(sysTime.sYear, "0000")
     timeStr = timeStr & "/"
     timeStr = timeStr & Format(sysTime.sMonth, "00")
@@ -48,3 +48,4 @@ Public Function MyGetSystemTime() As String
     
     MyGetSystemTime = timeStr
 End Function
+

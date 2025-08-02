@@ -1,13 +1,14 @@
-Attribute VB_Name = "M_Common"
+ï»¿Attribute VB_Name = "M_Common"
 Option Explicit
 
-Public Sub ƒZƒ‹‚ÌˆÊ’u‚É‡‚í‚¹‚é(T_Btn As CommandButton, T_WR As Range)
+Public Sub ã‚»ãƒ«ã®ä½ç½®ã«åˆã‚ã›ã‚‹(T_Btn As CommandButton, T_WR As Range)
     T_Btn.Left = T_WR.Left
     T_Btn.Top = T_WR.Top
     T_Btn.Width = T_WR.Width
     T_Btn.Height = T_WR.Height
 End Sub
 
-Public Sub ‘ÎÛƒZƒ‹‚Ì‘®‚ğw’è‘®‚É‚·‚é(T_WR As Range, formatStr)
+Public Sub å¯¾è±¡ã‚»ãƒ«ã®æ›¸å¼ã‚’æŒ‡å®šæ›¸å¼ã«ã™ã‚‹(T_WR As Range, formatStr)
     T_WR.NumberFormatLocal = formatStr
 End Sub
+

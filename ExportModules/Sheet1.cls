@@ -1,4 +1,4 @@
-VERSION 1.0 CLASS
+ï»¿VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
 END
@@ -10,29 +10,29 @@ Attribute VB_Exposed = True
 Option Explicit
 
 '------------------------------------------------------------------------------
-' •\‚Ì‘®İ’è
+' è¡¨ã®æ›¸å¼è¨­å®š
 '------------------------------------------------------------------------------
 Private Sub CellsSetting(T_WR As Range, rowsCount As Long, titleStr As String, secondOperationStr As String)
-    ' •\‚ÌƒNƒŠƒA
+    ' è¡¨ã®ã‚¯ãƒªã‚¢
     T_WR.CurrentRegion.Clear
     T_WR.CurrentRegion.Borders.LineStyle = xlNone
     
-    ' —ñŒ©o‚µ
+    ' åˆ—è¦‹å‡ºã—
     T_WR.Cells(0, 1).value = titleStr
-    T_WR.Cells(1, 2).value = "ˆ—ŠÔ‡Œv(s)"
-    T_WR.Cells(1, 3).value = "“Ç‚İ‚İˆ—ŠÔ(s)"
-    T_WR.Cells(1, 4).value = secondOperationStr & "ˆ—ŠÔ(s)"
-    T_WR.Cells(1, 5).value = "ŠJn"
-    T_WR.Cells(1, 6).value = "“Ç‚İ‚İI—¹"
-    T_WR.Cells(1, 7).value = secondOperationStr & "I—¹"
+    T_WR.Cells(1, 2).value = "å‡¦ç†æ™‚é–“åˆè¨ˆ(s)"
+    T_WR.Cells(1, 3).value = "èª­ã¿è¾¼ã¿å‡¦ç†æ™‚é–“(s)"
+    T_WR.Cells(1, 4).value = secondOperationStr & "å‡¦ç†æ™‚é–“(s)"
+    T_WR.Cells(1, 5).value = "é–‹å§‹æ™‚åˆ»"
+    T_WR.Cells(1, 6).value = "èª­ã¿è¾¼ã¿çµ‚äº†æ™‚åˆ»"
+    T_WR.Cells(1, 7).value = secondOperationStr & "çµ‚äº†æ™‚åˆ»"
     
-    ' ÅIs‚É•½‹Ï’l‚ğ‘‚«o‚·
-    T_WR.Cells(2 + rowsCount, 1).value = "•½‹Ï"
+    ' æœ€çµ‚è¡Œã«å¹³å‡å€¤ã‚’æ›¸ãå‡ºã™
+    T_WR.Cells(2 + rowsCount, 1).value = "å¹³å‡"
     T_WR.Cells(2 + rowsCount, 2).Formula = "=AVERAGE(" & Replace(T_WR.Cells(2, 2).Address, "$", "") & ":" & Replace(T_WR.Cells(2 + rowsCount - 1, 2).Address, "$", "") & ")"
     T_WR.Cells(2 + rowsCount, 3).Formula = "=AVERAGE(" & Replace(T_WR.Cells(2, 3).Address, "$", "") & ":" & Replace(T_WR.Cells(2 + rowsCount - 1, 3).Address, "$", "") & ")"
     T_WR.Cells(2 + rowsCount, 4).Formula = "=AVERAGE(" & Replace(T_WR.Cells(2, 4).Address, "$", "") & ":" & Replace(T_WR.Cells(2 + rowsCount - 1, 4).Address, "$", "") & ")"
 
-    ' ‘®İ’è
+    ' æ›¸å¼è¨­å®š
     T_WR.Range(Cells(2, 2).Address & ":" & Cells(2 + rowsCount + 1, 2).Address).NumberFormat = "0.000"
     T_WR.Range(Cells(2, 3).Address & ":" & Cells(2 + rowsCount + 1, 3).Address).NumberFormat = "0.000"
     T_WR.Range(Cells(2, 4).Address & ":" & Cells(2 + rowsCount + 1, 4).Address).NumberFormat = "0.000"
@@ -40,22 +40,22 @@ Private Sub CellsSetting(T_WR As Range, rowsCount As Long, titleStr As String, s
     T_WR.Range(Cells(2, 6).Address & ":" & Cells(2 + rowsCount, 6).Address).NumberFormat = "yyyy/mm/dd hh:mm:ss.000"
     T_WR.Range(Cells(2, 7).Address & ":" & Cells(2 + rowsCount, 7).Address).NumberFormat = "yyyy/mm/dd hh:mm:ss.000"
 
-    ' Œrü‚ğˆø‚­iƒ^ƒCƒgƒ‹sj
+    ' ç½«ç·šã‚’å¼•ãï¼ˆã‚¿ã‚¤ãƒˆãƒ«è¡Œï¼‰
     drawBorder T_WR.Range(Cells(1, 1).Address & ":" & Cells(1, 7).Address), xlContinuous
     drawVertical T_WR.Range(Cells(1, 1).Address & ":" & Cells(1, 7).Address), xlContinuous
 
-    ' Œrü‚ğˆø‚­iƒf[ƒ^sj
+    ' ç½«ç·šã‚’å¼•ãï¼ˆãƒ‡ãƒ¼ã‚¿è¡Œï¼‰
     drawBorder T_WR.Range(Cells(2, 1).Address & ":" & Cells(2 + rowsCount - 1, 7).Address), xlContinuous
     drawVertical T_WR.Range(Cells(2, 1).Address & ":" & Cells(2 + rowsCount - 1, 7).Address), xlContinuous
     drawHorizontal T_WR.Range(Cells(2, 1).Address & ":" & Cells(2 + rowsCount - 1, 7).Address), xlDot
     
-    ' Œrü‚ğˆø‚­i•½‹Ï’lo—Ísj
+    ' ç½«ç·šã‚’å¼•ãï¼ˆå¹³å‡å€¤å‡ºåŠ›è¡Œï¼‰
     drawBorder T_WR.Range(Cells(1 + rowsCount + 1, 1).Address & ":" & Cells(1 + rowsCount + 1, 4).Address), xlContinuous
     drawVertical T_WR.Range(Cells(1 + rowsCount + 1, 1).Address & ":" & Cells(1 + rowsCount + 1, 4).Address), xlContinuous
 End Sub
 
 '------------------------------------------------------------------------------
-' [“Ç‚İ‚İEæ‚èo‚µ(”z—ñ(Struct))]ƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN
+' [èª­ã¿è¾¼ã¿ãƒ»å–ã‚Šå‡ºã—(é…åˆ—(Struct))]ãƒœã‚¿ãƒ³ã‚’ã‚¯ãƒªãƒƒã‚¯
 '------------------------------------------------------------------------------
 Private Sub CommandButton11_Click()
     Dim filePath As String
@@ -72,47 +72,47 @@ Private Sub CommandButton11_Click()
     Dim T_WR As Range
     Set T_WR = Range("B8")
         
-    CellsSetting T_WR, loopCount, "Array(Struct) - Load/Read", "“Ç‚İo‚µ"
+    CellsSetting T_WR, loopCount, "Array(Struct) - Load/Read", "èª­ã¿å‡ºã—"
     
     Dim lines As ReadArray
     Dim i As Long
     For i = 1 To loopCount
-        T_WR.Cells(1 + i, 1).value = i & "‰ñ–Ú"
-        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "ˆ—’†..."
+        T_WR.Cells(1 + i, 1).value = i & "å›ç›®"
+        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "å‡¦ç†ä¸­..."
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 5).value = MyGetSystemTime
         
-        ' ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
-        lines = ArrayFileLoad(fileNamePath)
+        ' ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
+        lines = ArrayFileLoad(fileNamePath, "UTF-8", vbCrLf)
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 6).value = MyGetSystemTime
         
-        ' “Ç‚İ‚İˆ—ŠÔ‚ğo—Í
+        ' èª­ã¿è¾¼ã¿å‡¦ç†æ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 3).value = (T_WR.Cells(1 + i, 6).value - T_WR.Cells(1 + i, 5).value) * (60 * 60 * 24#)
         
-        ' ƒCƒ~ƒfƒBƒGƒCƒgƒEƒCƒ“ƒhƒE‚Éo—Í
+        ' ã‚¤ãƒŸãƒ‡ã‚£ã‚¨ã‚¤ãƒˆã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«å‡ºåŠ›
         ArrayPrint lines
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 7).value = MyGetSystemTime
         
-        ' “Ç‚İo‚µˆ—ŠÔ‚ğo—Í
+        ' èª­ã¿å‡ºã—å‡¦ç†æ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 4).value = (T_WR.Cells(1 + i, 7).value - T_WR.Cells(1 + i, 6).value) * (60 * 60 * 24#)
         
-        ' ‡ŒvŠÔ‚ğo—Í
+        ' åˆè¨ˆæ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 2).value = T_WR.Cells(1 + i, 3).value + T_WR.Cells(1 + i, 4).value
     Next
 
     Application.StatusBar = False
     Application.Cursor = xlDefault
     
-    MsgBox "ˆ—‚ªI‚í‚è‚Ü‚µ‚½"
+    MsgBox "å‡¦ç†ãŒçµ‚ã‚ã‚Šã¾ã—ãŸ"
 End Sub
 
 '------------------------------------------------------------------------------
-' u“Ç‚İ‚İEæ“ª—v‘f‚ğíœ(”z—ñ(Struct))vƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN
+' ã€Œèª­ã¿è¾¼ã¿ãƒ»å…ˆé ­è¦ç´ ã‚’å‰Šé™¤(é…åˆ—(Struct))ã€ãƒœã‚¿ãƒ³ã‚’ã‚¯ãƒªãƒƒã‚¯
 '------------------------------------------------------------------------------
 Private Sub CommandButton12_Click()
     Dim filePath As String
@@ -129,47 +129,47 @@ Private Sub CommandButton12_Click()
     Dim T_WR As Range
     Set T_WR = Range("J8")
 
-    CellsSetting T_WR, loopCount, "Array(Struct) -  Load/Remove", "æ“ªíœ"
+    CellsSetting T_WR, loopCount, "Array(Struct) -  Load/Remove", "å…ˆé ­å‰Šé™¤"
     
     Dim lines As ReadArray
     Dim i As Long
     For i = 1 To loopCount
-        T_WR.Cells(1 + i, 1).value = i & "‰ñ–Ú"
-        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "ˆ—’†..."
+        T_WR.Cells(1 + i, 1).value = i & "å›ç›®"
+        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "å‡¦ç†ä¸­..."
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 5).value = MyGetSystemTime
         
-        ' ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
-        lines = ArrayFileLoad(fileNamePath)
+        ' ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
+        lines = ArrayFileLoad(fileNamePath, "UTF-8", vbCrLf)
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 6).value = MyGetSystemTime
         
-        ' “Ç‚İ‚İˆ—ŠÔ‚ğo—Í
+        ' èª­ã¿è¾¼ã¿å‡¦ç†æ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 3).value = (T_WR.Cells(1 + i, 6).value - T_WR.Cells(1 + i, 5).value) * (60 * 60 * 24#)
         
-        ' æ“ª‚Ì—v‘f‚ğíœ
+        ' å…ˆé ­ã®è¦ç´ ã‚’å‰Šé™¤
         RemoveItem lines, 0
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 7).value = MyGetSystemTime
         
-        ' “Ç‚İo‚µˆ—ŠÔ‚ğo—Í
+        ' èª­ã¿å‡ºã—å‡¦ç†æ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 4).value = (T_WR.Cells(1 + i, 7).value - T_WR.Cells(1 + i, 6).value) * (60 * 60 * 24#)
         
-        ' ‡ŒvŠÔ‚ğo—Í
+        ' åˆè¨ˆæ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 2).value = T_WR.Cells(1 + i, 3).value + T_WR.Cells(1 + i, 4).value
     Next
 
     Application.StatusBar = False
     Application.Cursor = xlDefault
     
-    MsgBox "ˆ—‚ªI‚í‚è‚Ü‚µ‚½"
+    MsgBox "å‡¦ç†ãŒçµ‚ã‚ã‚Šã¾ã—ãŸ"
 End Sub
 
 '------------------------------------------------------------------------------
-' [“Ç‚İ‚İEæ‚èo‚µ(”z—ñ(Class))]ƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN
+' [èª­ã¿è¾¼ã¿ãƒ»å–ã‚Šå‡ºã—(é…åˆ—(Class))]ãƒœã‚¿ãƒ³ã‚’ã‚¯ãƒªãƒƒã‚¯
 '------------------------------------------------------------------------------
 Private Sub CommandButton21_Click()
     Dim filePath As String
@@ -186,49 +186,49 @@ Private Sub CommandButton21_Click()
     Dim T_WR As Range
     Set T_WR = Range("B18")
     
-    CellsSetting T_WR, loopCount, "Array(Class) - Load/Read", "“Ç‚İo‚µ"
+    CellsSetting T_WR, loopCount, "Array(Class) - Load/Read", "èª­ã¿å‡ºã—"
 
     Dim ca As ClassArray
     Dim i As Long
     For i = 1 To loopCount
-        T_WR.Cells(1 + i, 1).value = i & "‰ñ–Ú"
-        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "ˆ—’†..."
+        T_WR.Cells(1 + i, 1).value = i & "å›ç›®"
+        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "å‡¦ç†ä¸­..."
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 5).value = MyGetSystemTime
         
-        ' ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
+        ' ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
         Set ca = New ClassArray
-        ca.ArrayFileLoad (fileNamePath)
+        ca.ArrayFileLoad fileNamePath, "UTF-8", vbCrLf
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 6).value = MyGetSystemTime
         
-        ' “Ç‚İ‚İˆ—ŠÔ‚ğo—Í
+        ' èª­ã¿è¾¼ã¿å‡¦ç†æ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 3).value = (T_WR.Cells(1 + i, 6).value - T_WR.Cells(1 + i, 5).value) * (60 * 60 * 24#)
         
-        ' ƒCƒ~ƒfƒBƒGƒCƒgƒEƒCƒ“ƒhƒE‚Éo—Í
+        ' ã‚¤ãƒŸãƒ‡ã‚£ã‚¨ã‚¤ãƒˆã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«å‡ºåŠ›
         ca.ArrayPrint
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 7).value = MyGetSystemTime
         
-        ' “Ç‚İo‚µˆ—ŠÔ‚ğo—Í
+        ' èª­ã¿å‡ºã—å‡¦ç†æ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 4).value = (T_WR.Cells(1 + i, 7).value - T_WR.Cells(1 + i, 6).value) * (60 * 60 * 24#)
         
-        ' ‡ŒvŠÔ‚ğo—Í
+        ' åˆè¨ˆæ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 2).value = T_WR.Cells(1 + i, 3).value + T_WR.Cells(1 + i, 4).value
     Next
 
     Application.StatusBar = False
     Application.Cursor = xlDefault
     
-    MsgBox "ˆ—‚ªI‚í‚è‚Ü‚µ‚½"
+    MsgBox "å‡¦ç†ãŒçµ‚ã‚ã‚Šã¾ã—ãŸ"
 
 End Sub
 
 '------------------------------------------------------------------------------
-' u“Ç‚İ‚İEæ“ª—v‘f‚ğíœ(”z—ñ(Class))vƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN
+' ã€Œèª­ã¿è¾¼ã¿ãƒ»å…ˆé ­è¦ç´ ã‚’å‰Šé™¤(é…åˆ—(Class))ã€ãƒœã‚¿ãƒ³ã‚’ã‚¯ãƒªãƒƒã‚¯
 '------------------------------------------------------------------------------
 Private Sub CommandButton22_Click()
     Dim filePath As String
@@ -245,48 +245,48 @@ Private Sub CommandButton22_Click()
     Dim T_WR As Range
     Set T_WR = Range("J18")
 
-    CellsSetting T_WR, loopCount, "Array(Struct) - Load/Remove", "æ“ªíœ"
+    CellsSetting T_WR, loopCount, "Array(Struct) - Load/Remove", "å…ˆé ­å‰Šé™¤"
     
     Dim ca As ClassArray
     Dim i As Long
     For i = 1 To loopCount
-        T_WR.Cells(1 + i, 1).value = i & "‰ñ–Ú"
-        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "ˆ—’†..."
+        T_WR.Cells(1 + i, 1).value = i & "å›ç›®"
+        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "å‡¦ç†ä¸­..."
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 5).value = MyGetSystemTime
         
-        ' ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
+        ' ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
         Set ca = New ClassArray
-        ca.ArrayFileLoad (fileNamePath)
+        ca.ArrayFileLoad fileNamePath, "UTF-8", vbCrLf
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 6).value = MyGetSystemTime
         
-        ' “Ç‚İ‚İˆ—ŠÔ‚ğo—Í
+        ' èª­ã¿è¾¼ã¿å‡¦ç†æ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 3).value = (T_WR.Cells(1 + i, 6).value - T_WR.Cells(1 + i, 5).value) * (60 * 60 * 24#)
         
-        ' æ“ª‚Ì—v‘f‚ğíœ
+        ' å…ˆé ­ã®è¦ç´ ã‚’å‰Šé™¤
         ca.RemoveItem (0)
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 7).value = MyGetSystemTime
         
-        ' “Ç‚İo‚µˆ—ŠÔ‚ğo—Í
+        ' èª­ã¿å‡ºã—å‡¦ç†æ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 4).value = (T_WR.Cells(1 + i, 7).value - T_WR.Cells(1 + i, 6).value) * (60 * 60 * 24#)
         
-        ' ‡ŒvŠÔ‚ğo—Í
+        ' åˆè¨ˆæ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 2).value = T_WR.Cells(1 + i, 3).value + T_WR.Cells(1 + i, 4).value
     Next
 
     Application.StatusBar = False
     Application.Cursor = xlDefault
     
-    MsgBox "ˆ—‚ªI‚í‚è‚Ü‚µ‚½"
+    MsgBox "å‡¦ç†ãŒçµ‚ã‚ã‚Šã¾ã—ãŸ"
 End Sub
 
 '------------------------------------------------------------------------------
-' u“Ç‚İ‚İEæ‚èo‚µ(Collection)vƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN
+' ã€Œèª­ã¿è¾¼ã¿ãƒ»å–ã‚Šå‡ºã—(Collection)ã€ãƒœã‚¿ãƒ³ã‚’ã‚¯ãƒªãƒƒã‚¯
 '------------------------------------------------------------------------------
 Private Sub CommandButton31_Click()
     Dim filePath As String
@@ -303,36 +303,36 @@ Private Sub CommandButton31_Click()
     Dim T_WR As Range
     Set T_WR = Range("B28")
     
-    CellsSetting T_WR, loopCount, "Collection - Load/Read", "“Ç‚İo‚µ"
+    CellsSetting T_WR, loopCount, "Collection - Load/Read", "èª­ã¿å‡ºã—"
     
     Dim lines As Collection
     Dim i As Long
     For i = 1 To loopCount
-        T_WR.Cells(1 + i, 1).value = i & "‰ñ–Ú"
-        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "ˆ—’†..."
+        T_WR.Cells(1 + i, 1).value = i & "å›ç›®"
+        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "å‡¦ç†ä¸­..."
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 5).value = MyGetSystemTime
         
-        ' ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
-        Set lines = CollectionFileLoad(fileNamePath)
+        ' ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
+        Set lines = CollectionFileLoad(fileNamePath, "UTF-8", vbCrLf)
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 6).value = MyGetSystemTime
         
-        ' “Ç‚İ‚İˆ—ŠÔ‚ğo—Í
+        ' èª­ã¿è¾¼ã¿å‡¦ç†æ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 3).value = (T_WR.Cells(1 + i, 6).value - T_WR.Cells(1 + i, 5).value) * (60 * 60 * 24#)
         
-        ' ƒCƒ~ƒfƒBƒGƒCƒgƒEƒCƒ“ƒhƒE‚Éo—Í
+        ' ã‚¤ãƒŸãƒ‡ã‚£ã‚¨ã‚¤ãƒˆã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«å‡ºåŠ›
         CollectionPrint lines
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 7).value = MyGetSystemTime
         
-        ' “Ç‚İo‚µˆ—ŠÔ‚ğo—Í
+        ' èª­ã¿å‡ºã—å‡¦ç†æ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 4).value = (T_WR.Cells(1 + i, 7).value - T_WR.Cells(1 + i, 6).value) * (60 * 60 * 24#)
         
-        ' ‡ŒvŠÔ‚ğo—Í
+        ' åˆè¨ˆæ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 2).value = T_WR.Cells(1 + i, 3).value + T_WR.Cells(1 + i, 4).value
     
     Next
@@ -340,12 +340,12 @@ Private Sub CommandButton31_Click()
     Application.StatusBar = False
     Application.Cursor = xlDefault
     
-    MsgBox "ˆ—‚ªI‚í‚è‚Ü‚µ‚½"
+    MsgBox "å‡¦ç†ãŒçµ‚ã‚ã‚Šã¾ã—ãŸ"
 
 End Sub
 
 '------------------------------------------------------------------------------
-' u“Ç‚İ‚İEæ“ª—v‘f‚ğíœ(Collection)vƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN
+' ã€Œèª­ã¿è¾¼ã¿ãƒ»å…ˆé ­è¦ç´ ã‚’å‰Šé™¤(Collection)ã€ãƒœã‚¿ãƒ³ã‚’ã‚¯ãƒªãƒƒã‚¯
 '------------------------------------------------------------------------------
 Private Sub CommandButton32_Click()
     Dim filePath As String
@@ -362,58 +362,59 @@ Private Sub CommandButton32_Click()
     Dim T_WR As Range
     Set T_WR = Range("J28")
     
-    CellsSetting T_WR, loopCount, "Collection - Load/Remove", "æ“ªíœ"
+    CellsSetting T_WR, loopCount, "Collection - Load/Remove", "å…ˆé ­å‰Šé™¤"
     
     Dim lines As Collection
     Dim i As Long
     For i = 1 To loopCount
-        T_WR.Cells(1 + i, 1).value = i & "‰ñ–Ú"
-        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "ˆ—’†..."
+        T_WR.Cells(1 + i, 1).value = i & "å›ç›®"
+        Application.StatusBar = T_WR.Cells(1 + i, 1).value & "å‡¦ç†ä¸­..."
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 5).value = MyGetSystemTime
         
-        ' ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
-        Set lines = CollectionFileLoad(fileNamePath)
+        ' ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
+        Set lines = CollectionFileLoad(fileNamePath, "UTF-8", vbCrLf)
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 6).value = MyGetSystemTime
         
-        ' “Ç‚İ‚İˆ—ŠÔ‚ğo—Í
+        ' èª­ã¿è¾¼ã¿å‡¦ç†æ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 3).value = (T_WR.Cells(1 + i, 6).value - T_WR.Cells(1 + i, 5).value) * (60 * 60 * 24#)
         
-        ' æ“ª‚Ì—v‘f‚ğíœ
+        ' å…ˆé ­ã®è¦ç´ ã‚’å‰Šé™¤
         lines.Remove (1)
         
-        ' Œ»İ‚Ì“ú•tæ“¾
+        ' ç¾åœ¨ã®æ—¥ä»˜æ™‚åˆ»å–å¾—
         T_WR.Cells(1 + i, 7).value = MyGetSystemTime
         
-        ' “Ç‚İo‚µˆ—ŠÔ‚ğo—Í
+        ' èª­ã¿å‡ºã—å‡¦ç†æ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 4).value = (T_WR.Cells(1 + i, 7).value - T_WR.Cells(1 + i, 6).value) * (60 * 60 * 24#)
         
-        ' ‡ŒvŠÔ‚ğo—Í
+        ' åˆè¨ˆæ™‚é–“ã‚’å‡ºåŠ›
         T_WR.Cells(1 + i, 2).value = T_WR.Cells(1 + i, 3).value + T_WR.Cells(1 + i, 4).value
     Next
 
     Application.StatusBar = False
     Application.Cursor = xlDefault
     
-    MsgBox "ˆ—‚ªI‚í‚è‚Ü‚µ‚½"
+    MsgBox "å‡¦ç†ãŒçµ‚ã‚ã‚Šã¾ã—ãŸ"
 End Sub
 
 '------------------------------------------------------------------------------
-' ƒV[ƒg‚ªƒAƒNƒeƒBƒu‚É‚È‚Á‚½‚Æ‚«
+' ã‚·ãƒ¼ãƒˆãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ãªã£ãŸã¨ã
 '------------------------------------------------------------------------------
 Private Sub Worksheet_Activate()
     Dim loopCount As Long
     loopCount = Range("C4").value
     
-    ƒZƒ‹‚ÌˆÊ’u‚É‡‚í‚¹‚é CommandButton11, Range("C6:D7")
-    ƒZƒ‹‚ÌˆÊ’u‚É‡‚í‚¹‚é CommandButton21, Range("C6:D7").Offset((5 + loopCount) * 1, 0)
-    ƒZƒ‹‚ÌˆÊ’u‚É‡‚í‚¹‚é CommandButton31, Range("C6:D7").Offset((5 + loopCount) * 2, 0)
+    ã‚»ãƒ«ã®ä½ç½®ã«åˆã‚ã›ã‚‹ CommandButton11, Range("C6:D7")
+    ã‚»ãƒ«ã®ä½ç½®ã«åˆã‚ã›ã‚‹ CommandButton21, Range("C6:D7").Offset((5 + loopCount) * 1, 0)
+    ã‚»ãƒ«ã®ä½ç½®ã«åˆã‚ã›ã‚‹ CommandButton31, Range("C6:D7").Offset((5 + loopCount) * 2, 0)
 
-    ƒZƒ‹‚ÌˆÊ’u‚É‡‚í‚¹‚é CommandButton12, Range("K6:L7")
-    ƒZƒ‹‚ÌˆÊ’u‚É‡‚í‚¹‚é CommandButton22, Range("K6:L7").Offset((5 + loopCount) * 1, 0)
-    ƒZƒ‹‚ÌˆÊ’u‚É‡‚í‚¹‚é CommandButton32, Range("K6:L7").Offset((5 + loopCount) * 2, 0)
+    ã‚»ãƒ«ã®ä½ç½®ã«åˆã‚ã›ã‚‹ CommandButton12, Range("K6:L7")
+    ã‚»ãƒ«ã®ä½ç½®ã«åˆã‚ã›ã‚‹ CommandButton22, Range("K6:L7").Offset((5 + loopCount) * 1, 0)
+    ã‚»ãƒ«ã®ä½ç½®ã«åˆã‚ã›ã‚‹ CommandButton32, Range("K6:L7").Offset((5 + loopCount) * 2, 0)
 
 End Sub
+

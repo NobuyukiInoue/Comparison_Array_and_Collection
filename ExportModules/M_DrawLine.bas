@@ -1,11 +1,11 @@
-Attribute VB_Name = "M_DrawLine"
+ï»¿Attribute VB_Name = "M_DrawLine"
 Option Explicit
 
-' xlContinuous  Àü
-' xlDot ”jü
+' xlContinuous  å®Ÿç·š
+' xlDot ç ´ç·š
 
 '------------------------------------------------------------------------------
-' ŠO˜g‚ğˆø‚­
+' å¤–æ ã‚’å¼•ã
 '------------------------------------------------------------------------------
 Sub drawBorder(T_WR As Range, argLineStyle As Long)
     With T_WR.Borders(xlEdgeLeft)
@@ -35,7 +35,7 @@ Sub drawBorder(T_WR As Range, argLineStyle As Long)
 End Sub
 
 '------------------------------------------------------------------------------
-' cü‚ğˆø‚­
+' ç¸¦ç·šã‚’å¼•ã
 '------------------------------------------------------------------------------
 Sub drawVertical(T_WR As Range, argLineStyle As Long)
     With T_WR.Borders(xlInsideVertical)
@@ -47,7 +47,7 @@ Sub drawVertical(T_WR As Range, argLineStyle As Long)
 End Sub
 
 '------------------------------------------------------------------------------
-' ‰¡ü‚ğˆø‚­
+' æ¨ªç·šã‚’å¼•ã
 '------------------------------------------------------------------------------
 Sub drawHorizontal(T_WR As Range, argLineStyle As Long)
     With T_WR.Borders(xlInsideHorizontal)
@@ -57,4 +57,5 @@ Sub drawHorizontal(T_WR As Range, argLineStyle As Long)
         .Weight = xlThin
     End With
 End Sub
+
 

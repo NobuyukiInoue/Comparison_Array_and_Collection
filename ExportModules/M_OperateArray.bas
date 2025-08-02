@@ -1,4 +1,4 @@
-Attribute VB_Name = "M_OperateArray"
+ï»¿Attribute VB_Name = "M_OperateArray"
 Option Explicit
 
 Type ReadArray
@@ -10,7 +10,7 @@ End Type
 Private Const BLOCK_SIZE As Long = 4096
 
 '------------------------------------------------------------------------------
-' ReadArray‚ğ‰Šú‰»‚·‚é
+' ReadArrayã‚’åˆæœŸåŒ–ã™ã‚‹
 '------------------------------------------------------------------------------
 Public Function ArrayInit() As ReadArray
     Dim lines As ReadArray
@@ -23,7 +23,7 @@ Public Function ArrayInit() As ReadArray
 End Function
 
 '------------------------------------------------------------------------------
-' ReadArray“à‚Ì”z—ñ‚É—v‘f‚ğ’Ç‰Á‚·‚é
+' ReadArrayå†…ã®é…åˆ—ã«è¦ç´ ã‚’è¿½åŠ ã™ã‚‹
 '------------------------------------------------------------------------------
 Public Sub AddItem(ByRef lines As ReadArray, ByRef value As String)
     If lines.Count >= lines.ArraySize Then
@@ -36,7 +36,7 @@ Public Sub AddItem(ByRef lines As ReadArray, ByRef value As String)
 End Sub
 
 '------------------------------------------------------------------------------
-' ReadArray“à‚Ì”z—ñ‚Ìw’è‚µ‚½”Ô†‚Ì—v‘f‚ğíœ‚·‚é
+' ReadArrayå†…ã®é…åˆ—ã®æŒ‡å®šã—ãŸç•ªå·ã®è¦ç´ ã‚’å‰Šé™¤ã™ã‚‹
 '------------------------------------------------------------------------------
 Public Sub RemoveItem(ByRef lines As ReadArray, index As Long)
     Dim i As Long
@@ -48,9 +48,54 @@ Public Sub RemoveItem(ByRef lines As ReadArray, index As Long)
 End Sub
 
 '------------------------------------------------------------------------------
-' ƒtƒ@ƒCƒ‹‚ğReadArray‚É“Ç‚İ‚Ş
+' ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ReadArrayã«èª­ã¿è¾¼ã‚€(ADODBç‰ˆ)
+'
+' â˜†code(.Chrset)ã®å€¤
+' "SJIS", "UTF-8"
+'
+' â˜†separator(.LineSeparator)ã®å€¤
+' -------+---+-------------------------------
+' å®šæ•°    å€¤  èª¬æ˜
+' -------+---+-------------------------------
+' adCR    13  å¾©å¸°ã‚’ç¤ºã—ã¾ã™ã€‚
+' adCRLF  -1  æ—¢å®šå€¤ã€‚å¾©å¸°æ”¹è¡Œã‚’ç¤ºã—ã¾ã™ã€‚
+' adLF    10  æ”¹è¡Œã‚’ç¤ºã—ã¾ã™ã€‚
+' -------+-----------------------------------
+'
 '------------------------------------------------------------------------------
-Public Function ArrayFileLoad(fileNamePath As String) As ReadArray
+Public Function ArrayFileLoad(fileName As String, code As String, separator As String) As ReadArray
+    Dim lines As ReadArray
+    lines = ArrayInit()
+    
+    With CreateObject("ADODB.Stream")
+        .Charset = code
+    
+        Select Case separator
+        Case vbLf:
+            .lineseparator = 10
+        Case vbCr:
+            .lineseparator = 13
+        Case Else:
+            .lineseparator = -1
+        End Select
+        
+        .Open
+        .LoadFromFile fileName
+        
+        Do Until .EOS
+            AddItem lines, .ReadText(-2) ' ï¼‘è¡Œå–ã‚Šå‡ºã™
+        Loop
+        
+        .Close
+    End With
+
+    ArrayFileLoad = lines
+End Function
+    
+'------------------------------------------------------------------------------
+' ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ReadArrayã«èª­ã¿è¾¼ã‚€ï¼ˆãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ç‰ˆï¼‰
+'------------------------------------------------------------------------------
+Public Function ArrayFileLoad_normal(fileNamePath As String) As ReadArray
     Dim lines As ReadArray
     lines = ArrayInit()
     
@@ -62,7 +107,7 @@ Public Function ArrayFileLoad(fileNamePath As String) As ReadArray
     Dim buf As String
     Do While Not EOF(fileNum)
         If lines.Count Mod 1000 = 0 Then
-            Application.StatusBar = "“Ç‚İ‚İ’† ...(" & lines.Count & "s–Ú)"
+            Application.StatusBar = "èª­ã¿è¾¼ã¿ä¸­ ...(" & lines.Count & "è¡Œç›®)"
             DoEvents
         End If
     
@@ -74,7 +119,7 @@ Public Function ArrayFileLoad(fileNamePath As String) As ReadArray
 End Function
     
 '------------------------------------------------------------------------------
-' ReadArray‚ÌData‚ğo—Í‚·‚é
+' ReadArrayã®Dataã‚’å‡ºåŠ›ã™ã‚‹
 '------------------------------------------------------------------------------
 Public Sub ArrayPrint(ByRef lines As ReadArray)
     Dim i As Long
@@ -82,7 +127,7 @@ Public Sub ArrayPrint(ByRef lines As ReadArray)
     
     For i = 0 To lines.Count - 1
         If i Mod 1000 = 0 Then
-            Application.StatusBar = "o—Í’† ...(" & i & "s–Ú)"
+            Application.StatusBar = "å‡ºåŠ›ä¸­ ...(" & i & "è¡Œç›®)"
             DoEvents
         End If
 
@@ -90,3 +135,4 @@ Public Sub ArrayPrint(ByRef lines As ReadArray)
         temp = lines.Item(i)
     Next
 End Sub
+

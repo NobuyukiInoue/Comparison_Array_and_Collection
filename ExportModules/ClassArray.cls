@@ -1,4 +1,4 @@
-VERSION 1.0 CLASS
+ï»¿VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
 END
@@ -16,7 +16,7 @@ Public ArraySize As Long
 Private Const BLOCK_SIZE As Long = 4096
 
 '------------------------------------------------------------------------------
-' ƒNƒ‰ƒX‚ğ‰Šú‰»‚·‚é
+' ã‚¯ãƒ©ã‚¹ã‚’åˆæœŸåŒ–ã™ã‚‹
 '------------------------------------------------------------------------------
 Private Sub Class_Initialize()
     ReDim Preserve Item(0 To BLOCK_SIZE - 1)
@@ -25,7 +25,7 @@ Private Sub Class_Initialize()
 End Sub
 
 '------------------------------------------------------------------------------
-' Item()‚É’l‚ğ’Ç‰Á‚·‚é
+' Item()ã«å€¤ã‚’è¿½åŠ ã™ã‚‹
 '------------------------------------------------------------------------------
 Public Sub AddItem(value As String)
     If Count >= ArraySize Then
@@ -38,21 +38,21 @@ Public Sub AddItem(value As String)
 End Sub
 
 '------------------------------------------------------------------------------
-' Item(i)‚É’l‚ğŠi”[‚·‚é
+' Item(i)ã«å€¤ã‚’æ ¼ç´ã™ã‚‹
 '------------------------------------------------------------------------------
 Public Function SetItem(i As Long, ByRef value As String) As String
     Item(i) = value
 End Function
 
 '------------------------------------------------------------------------------
-' Item(i)‚Ì’l‚ğæ“¾‚·‚é
+' Item(i)ã®å€¤ã‚’å–å¾—ã™ã‚‹
 '------------------------------------------------------------------------------
 Public Function GetItem(i As Long) As String
     GetItem = Item(i)
 End Function
 
 '------------------------------------------------------------------------------
-' w’è‚µ‚½”Ô†‚Ì—v‘f‚ğíœ‚·‚é
+' æŒ‡å®šã—ãŸç•ªå·ã®è¦ç´ ã‚’å‰Šé™¤ã™ã‚‹
 '------------------------------------------------------------------------------
 Public Sub RemoveItem(index As Long)
     Dim i As Long
@@ -64,9 +64,49 @@ Public Sub RemoveItem(index As Long)
 End Sub
 
 '------------------------------------------------------------------------------
-' ƒtƒ@ƒCƒ‹‚ğReadArray‚É“Ç‚İ‚Ş
+' ãƒ•ã‚¡ã‚¤ãƒ«ã‚’Classã«èª­ã¿è¾¼ã‚€(ADODBç‰ˆ)
+'
+' â˜†code(.Chrset)ã®å€¤
+' "SJIS", "UTF-8"
+'
+' â˜†separator(.LineSeparator)ã®å€¤
+' -------+---+-------------------------------
+' å®šæ•°    å€¤  èª¬æ˜
+' -------+---+-------------------------------
+' adCR    13  å¾©å¸°ã‚’ç¤ºã—ã¾ã™ã€‚
+' adCRLF  -1  æ—¢å®šå€¤ã€‚å¾©å¸°æ”¹è¡Œã‚’ç¤ºã—ã¾ã™ã€‚
+' adLF    10  æ”¹è¡Œã‚’ç¤ºã—ã¾ã™ã€‚
+' -------+-----------------------------------
+'
 '------------------------------------------------------------------------------
-Public Sub ArrayFileLoad(fileNamePath As String)
+Public Sub ArrayFileLoad(fileName As String, code As String, separator As String)
+    With CreateObject("ADODB.Stream")
+        .Charset = code
+    
+        Select Case separator
+        Case vbLf:
+            .lineseparator = 10
+        Case vbCr:
+            .lineseparator = 13
+        Case Else:
+            .lineseparator = -1
+        End Select
+        
+        .Open
+        .LoadFromFile fileName
+        
+        Do Until .EOS
+            AddItem .ReadText(-2) ' ï¼‘è¡Œå–ã‚Šå‡ºã™
+        Loop
+        
+        .Close
+    End With
+End Sub
+    
+'------------------------------------------------------------------------------
+' ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ReadArrayã«èª­ã¿è¾¼ã‚€ï¼ˆãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ç‰ˆï¼‰
+'------------------------------------------------------------------------------
+Public Sub ArrayFileLoad_normal(fileNamePath As String)
     Dim fileNum As Long
     fileNum = FreeFile()
     
@@ -75,7 +115,7 @@ Public Sub ArrayFileLoad(fileNamePath As String)
     Dim buf As String
     Do While Not EOF(fileNum)
         If Count Mod 1000 = 0 Then
-            Application.StatusBar = "“Ç‚İ‚İ’† ...(" & Count & "s–Ú)"
+            Application.StatusBar = "èª­ã¿è¾¼ã¿ä¸­ ...(" & Count & "è¡Œç›®)"
             DoEvents
         End If
     
@@ -85,7 +125,7 @@ Public Sub ArrayFileLoad(fileNamePath As String)
 End Sub
     
 '------------------------------------------------------------------------------
-' ‚·‚×‚Ä‚ÌItem‚ğƒCƒ~ƒfƒBƒGƒCƒgƒEƒCƒ“ƒhƒE‚Éo—Í‚·‚é
+' ã™ã¹ã¦ã®Itemã‚’ã‚¤ãƒŸãƒ‡ã‚£ã‚¨ã‚¤ãƒˆã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«å‡ºåŠ›ã™ã‚‹
 '------------------------------------------------------------------------------
 Public Sub ArrayPrint()
     Dim i As Long
@@ -93,7 +133,7 @@ Public Sub ArrayPrint()
     
     For i = 0 To Count - 1
         If i Mod 1000 = 0 Then
-            Application.StatusBar = "o—Í’† ...(" & i & "s–Ú)"
+            Application.StatusBar = "å‡ºåŠ›ä¸­ ...(" & i & "è¡Œç›®)"
             DoEvents
         End If
     
@@ -101,4 +141,5 @@ Public Sub ArrayPrint()
         temp = GetItem(i)
     Next
 End Sub
+
 

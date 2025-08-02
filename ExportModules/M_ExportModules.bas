@@ -1,50 +1,50 @@
-Attribute VB_Name = "M_ExportModules"
+ï»¿Attribute VB_Name = "M_ExportModules"
 Option Explicit
 
 '--------------------------------------------------------------------------------------------------
-' ™ƒZƒLƒ…ƒŠƒeƒBƒZƒ“ƒ^[‚Ìİ’è
-' 1-1. Microsoft Office ƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN‚µA[Excel ‚ÌƒIƒvƒVƒ‡ƒ“] ‚ğƒNƒŠƒbƒN‚µ‚Ü‚·B
-' 1-2. [ƒZƒLƒ…ƒŠƒeƒB ƒZƒ“ƒ^[] ‚ğƒNƒŠƒbƒN‚µ‚Ü‚·¡
-' 1-3. [ƒZƒLƒ…ƒŠƒeƒB ƒZƒ“ƒ^[‚Ìİ’è] ‚ğƒNƒŠƒbƒN‚µ‚Ü‚·¡
-' 1-4. [ƒ}ƒNƒ‚Ìİ’è] ‚ğƒNƒŠƒbƒN‚µ‚Ü‚·¡
-' 1-5. [VBA ƒvƒƒWƒFƒNƒg ƒIƒuƒWƒFƒNƒg ƒ‚ƒfƒ‹‚Ö‚ÌƒAƒNƒZƒX‚ğM—Š‚·‚é] ƒ`ƒFƒbƒN ƒ{ƒbƒNƒX‚ğƒIƒ“‚É‚µ‚Ü‚·B
-' 1-6. [OK] ‚ğƒNƒŠƒbƒN‚µ‚Ä [Excel ‚ÌƒIƒvƒVƒ‡ƒ“] ƒ_ƒCƒAƒƒO ƒ{ƒbƒNƒX‚ğ•Â‚¶‚Ü‚·B
+' â˜†ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã‚»ãƒ³ã‚¿ãƒ¼ã®è¨­å®š
+' 1-1. Microsoft Office ãƒœã‚¿ãƒ³ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã€[Excel ã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³] ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¾ã™ã€‚
+' 1-2. [ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ ã‚»ãƒ³ã‚¿ãƒ¼] ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¾ã™ï½¡
+' 1-3. [ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ ã‚»ãƒ³ã‚¿ãƒ¼ã®è¨­å®š] ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¾ã™ï½¡
+' 1-4. [ãƒã‚¯ãƒ­ã®è¨­å®š] ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¾ã™ï½¡
+' 1-5. [VBA ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ ãƒ¢ãƒ‡ãƒ«ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã‚’ä¿¡é ¼ã™ã‚‹] ãƒã‚§ãƒƒã‚¯ ãƒœãƒƒã‚¯ã‚¹ã‚’ã‚ªãƒ³ã«ã—ã¾ã™ã€‚
+' 1-6. [OK] ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ [Excel ã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³] ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒœãƒƒã‚¯ã‚¹ã‚’é–‰ã˜ã¾ã™ã€‚
 '
-' ™VBEƒIƒuƒWƒFƒNƒg‚Ìg—p€”õ
-' VBAƒvƒƒOƒ‰ƒ€‚É‚æ‚Á‚Äƒ[ƒNƒuƒbƒN‚ÌVBAƒR[ƒh‚ğ•ÏX‚·‚é‚½‚ß‚É‚Í, Application.VBEƒIƒuƒWƒFƒNƒg‚ğg—p‚µ‚Ü‚·¡
-' VBEƒIƒuƒWƒFƒNƒg‚ğg—p‚·‚é‚É‚Í, Ÿ‚Ì2‚Â‚Ì€”õ‚ª•K—v‚Å‚·¡
-' 2-1. VBE‚É‚¨‚¢‚ÄMicrosoft Visual Basic for Applications Extensibility‚Ö‚ÌQÆ‚ğ’Ç‰Á‚·‚éB
-' 2-2.uVBAƒvƒƒWƒFƒNƒg ƒIƒuƒWƒFƒNƒgƒ‚ƒfƒ‹‚Ö‚ÌƒAƒNƒZƒX‚ğM—Š‚·‚évƒIƒvƒVƒ‡ƒ“‚ğw’è‚·‚éB
+' â˜†VBEã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½¿ç”¨æº–å‚™
+' VBAãƒ—ãƒ­ã‚°ãƒ©ãƒ ã«ã‚ˆã£ã¦ãƒ¯ãƒ¼ã‚¯ãƒ–ãƒƒã‚¯ã®VBAã‚³ãƒ¼ãƒ‰ã‚’å¤‰æ›´ã™ã‚‹ãŸã‚ã«ã¯, Application.VBEã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½¿ç”¨ã—ã¾ã™ï½¡
+' VBEã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½¿ç”¨ã™ã‚‹ã«ã¯, æ¬¡ã®2ã¤ã®æº–å‚™ãŒå¿…è¦ã§ã™ï½¡
+' 2-1. VBEã«ãŠã„ã¦Microsoft Visual Basic for Applications Extensibilityã¸ã®å‚ç…§ã‚’è¿½åŠ ã™ã‚‹ã€‚
+' 2-2.ã€ŒVBAãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ¢ãƒ‡ãƒ«ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã‚’ä¿¡é ¼ã™ã‚‹ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’æŒ‡å®šã™ã‚‹ã€‚
 '
 '--------------------------------------------------------------------------------------------------
 
 
 '--------------------------------------------------------------------------------------------------
-' ‘Sƒ‚ƒWƒ…[ƒ‹(VBAƒR[ƒh)‚ÌƒGƒNƒXƒ|[ƒg
+' å…¨ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«(VBAã‚³ãƒ¼ãƒ‰)ã®ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆ
 '--------------------------------------------------------------------------------------------------
-Public Sub ExportAll()
-    Dim module                  As VBComponent      '// ƒ‚ƒWƒ…[ƒ‹
-    Dim moduleList              As VBComponents     '// VBAƒvƒƒWƒFƒNƒg‚Ì‘Sƒ‚ƒWƒ…[ƒ‹
-    Dim extension                                   '// ƒ‚ƒWƒ…[ƒ‹‚ÌŠg’£q
-    Dim sPath As String                             '// ˆ—‘ÎÛƒuƒbƒN‚ÌƒpƒX
-    Dim sFilePath                                   '// ƒGƒNƒXƒ|[ƒgƒtƒ@ƒCƒ‹ƒpƒX
-    Dim TargetBook As Workbook                      '// ˆ—‘ÎÛƒuƒbƒNƒIƒuƒWƒFƒNƒg
+Public Sub ExportAll_UTF8()
+    Dim module                  As VBComponent      '// ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
+    Dim moduleList              As VBComponents     '// VBAãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®å…¨ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
+    Dim extension                                   '// ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®æ‹¡å¼µå­
+    Dim sPath As String                             '// å‡¦ç†å¯¾è±¡ãƒ–ãƒƒã‚¯ã®ãƒ‘ã‚¹
+    Dim sFilePath                                   '// ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+    Dim TargetBook As Workbook                      '// å‡¦ç†å¯¾è±¡ãƒ–ãƒƒã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     Dim Count As Long
 
     If Workbooks.Count > 1 Then
-        MsgBox "ƒ[ƒNƒuƒbƒN‚ª‚Q‚ÂˆÈãŠJ‚©‚ê‚Ä‚¢‚Ü‚·B", vbOKOnly, "ƒGƒ‰["
+        MsgBox "ãƒ¯ãƒ¼ã‚¯ãƒ–ãƒƒã‚¯ãŒï¼’ã¤ä»¥ä¸Šé–‹ã‹ã‚Œã¦ã„ã¾ã™ã€‚", vbOKOnly, "ã‚¨ãƒ©ãƒ¼"
         Exit Sub
     End If
 
     Dim targetPath As String
 
     '------------------------------------------------------
-    ' ƒtƒHƒ‹ƒ_‚Ì‘I‘ğƒ_ƒCƒAƒƒO‚ğŠJ‚­
+    ' ãƒ•ã‚©ãƒ«ãƒ€ã®é¸æŠãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‹ã
     '------------------------------------------------------
     With Application.FileDialog(msoFileDialogFolderPicker)
         .AllowMultiSelect = True
         .InitialFileName = ActiveWorkbook.Path
-        .Title = "ƒGƒNƒXƒ|[ƒgæ‚ÌƒtƒHƒ‹ƒ_‚ğ‘I‘ğ"
+        .Title = "ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆå…ˆã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’é¸æŠ"
 
         If .Show = True Then
             targetPath = .SelectedItems(1)
@@ -53,7 +53,7 @@ Public Sub ExportAll()
 
     If targetPath = "" Then
 
-        ' ƒtƒHƒ‹ƒ_‚ª‘I‘ğ‚³‚ê‚È‚©‚Á‚½‚Æ‚«
+        ' ãƒ•ã‚©ãƒ«ãƒ€ãŒé¸æŠã•ã‚Œãªã‹ã£ãŸã¨ã
         Exit Sub
 
     End If
@@ -62,53 +62,55 @@ Public Sub ExportAll()
     sPath = ActiveWorkbook.Path
 
     If Dir(targetPath, vbDirectory) = "" Then
-        MsgBox targetPath & " ‚ª‘¶İ‚µ‚Ü‚¹‚ñB", vbOKOnly, "ƒGƒ‰["
+        MsgBox targetPath & " ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚", vbOKOnly, "ã‚¨ãƒ©ãƒ¼"
         Exit Sub
     End If
 
-    '// ˆ—‘ÎÛƒuƒbƒN‚Ìƒ‚ƒWƒ…[ƒ‹ˆê——‚ğæ“¾
+    '// å‡¦ç†å¯¾è±¡ãƒ–ãƒƒã‚¯ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ä¸€è¦§ã‚’å–å¾—
     Set moduleList = TargetBook.VBProject.VBComponents
 
-    '// VBAƒvƒƒWƒFƒNƒg‚ÉŠÜ‚Ü‚ê‚é‘S‚Ä‚Ìƒ‚ƒWƒ…[ƒ‹‚ğƒ‹[ƒv
+    '// VBAãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«å«ã¾ã‚Œã‚‹å…¨ã¦ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‚’ãƒ«ãƒ¼ãƒ—
     For Each module In moduleList
 
         If (module.Type = vbext_ct_ClassModule) Then
-            '// ƒNƒ‰ƒX
+            '// ã‚¯ãƒ©ã‚¹
             extension = "cls"
 
         ElseIf (module.Type = vbext_ct_MSForm) Then
-            '// ƒtƒH[ƒ€
-            '// .frx‚àˆê‚ÉƒGƒNƒXƒ|[ƒg‚³‚ê‚é
+            '// ãƒ•ã‚©ãƒ¼ãƒ 
+            '// .frxã‚‚ä¸€ç·’ã«ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã•ã‚Œã‚‹
             extension = "frm"
 
         ElseIf (module.Type = vbext_ct_StdModule) Then
-            '// •W€ƒ‚ƒWƒ…[ƒ‹
+            '// æ¨™æº–ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
             extension = "bas"
 
         ElseIf (module.Type = vbext_ct_Document) Then
-            '// ƒhƒLƒ…ƒƒ“ƒgiƒV[ƒgj
+            '// ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆï¼ˆã‚·ãƒ¼ãƒˆï¼‰
             extension = "cls"
 
         ElseIf (module.Type = vbext_ct_ActiveXDesigner) Then
-            '// ActiveXƒfƒUƒCƒi
-            '// ƒGƒNƒXƒ|[ƒg‘ÎÛŠO‚Ì‚½‚ßŸƒ‹[ƒv‚Ö
+            '// ActiveXãƒ‡ã‚¶ã‚¤ãƒŠ
+            '// ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆå¯¾è±¡å¤–ã®ãŸã‚æ¬¡ãƒ«ãƒ¼ãƒ—ã¸
             GoTo CONTINUE
 
         Else
-            '// ‚»‚Ì‘¼
-            '// ƒGƒNƒXƒ|[ƒg‘ÎÛŠO‚Ì‚½‚ßŸƒ‹[ƒv‚Ö
+            '// ãã®ä»–
+            '// ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆå¯¾è±¡å¤–ã®ãŸã‚æ¬¡ãƒ«ãƒ¼ãƒ—ã¸
             GoTo CONTINUE
 
         End If
 
-        '// ƒGƒNƒXƒ|[ƒgÀ{
+        '// ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆå®Ÿæ–½
         sFilePath = targetPath & "\" & module.Name & "." & extension
-        Application.StatusBar = sFilePath & " ‚ğƒGƒNƒXƒ|[ƒg’†..."
+        Application.StatusBar = sFilePath & " ã‚’ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆä¸­..."
 
-        Call module.Export(sFilePath)
+        module.Export sFilePath
+        convert_SJIS_to_UTF8 CStr(sFilePath)
+        
         Count = Count + 1
 
-        '// o—ÍæŠm”F—pƒƒOo—Í
+        '// å‡ºåŠ›å…ˆç¢ºèªç”¨ãƒ­ã‚°å‡ºåŠ›
         Debug.Print sFilePath
 
 CONTINUE:
@@ -116,10 +118,42 @@ CONTINUE:
 
     Application.StatusBar = False
 
-    MsgBox "‘Sƒ‚ƒWƒ…[ƒ‹‚ÌƒGƒNƒXƒ|[ƒg‚ªI‚í‚è‚Ü‚µ‚½" & vbCrLf _
+    MsgBox "å…¨ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆãŒçµ‚ã‚ã‚Šã¾ã—ãŸ" & vbCrLf _
         & vbCrLf _
-        & "o—Íƒtƒ@ƒCƒ‹” = " & Count _
-        , vbOKOnly, "ƒGƒNƒXƒ|[ƒgŠ®—¹"
+        & "å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«æ•° = " & Count _
+        , vbOKOnly, "ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆå®Œäº†"
 
+End Sub
+
+'--------------------------------------------------------------------------------------------------
+' SJIS/CRLF ã‹ã‚‰ UTF8/LF ã«å¤‰æ›ã—ã¦ä¸Šæ›¸ãã™ã‚‹
+'--------------------------------------------------------------------------------------------------
+Sub convert_SJIS_to_UTF8(fileName As String)
+    Dim content As String
+    
+    ' ã‚½ãƒ¼ã‚¹ãƒ•ã‚¡ã‚¤ãƒ«ã®å†…å®¹ã‚’èª­ã¿è¾¼ã‚€(SJIS/CRLF)
+    With CreateObject("ADODB.Stream")
+        .Charset = "SJIS"
+        .lineseparator = -1
+        .Open
+        .LoadFromFile fileName
+        
+        Do Until .EOS
+            content = content + .ReadText(-2) + vbLf ' ï¼‘è¡Œå–ã‚Šå‡ºã™
+        Loop
+        
+        .Close
+    End With
+    
+    Debug.Print content
+    
+    ' ãƒã‚¤ãƒˆ ãƒ‡ãƒ¼ã‚¿ã‚’æ›¸ãè¾¼ã‚€
+    With CreateObject("ADODB.Stream")
+        .Charset = "UTF-8"
+        .Open
+        .WriteText content, 1
+        .SaveToFile fileName, 2
+        .Close
+    End With
 End Sub
 
