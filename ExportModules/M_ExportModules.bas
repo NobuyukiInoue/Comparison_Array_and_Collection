@@ -134,7 +134,7 @@ Sub convert_SJIS_to_UTF8(fileName As String)
     ' ソースファイルの内容を読み込む(SJIS/CRLF)
     With CreateObject("ADODB.Stream")
         .Charset = "SJIS"
-        .lineseparator = -1
+        .LineSeparator = -1
         .Open
         .LoadFromFile fileName
         

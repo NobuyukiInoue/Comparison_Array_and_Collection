@@ -16,6 +16,19 @@ Option Explicit
 ' adLF    10  改行を示します。
 ' -------+-----------------------------------
 '
+' ☆ .ReadText (NumChars):
+' Stream オブジェクトから指定したバイト数または文字数のデータを読み取ります｡
+' NumChars : 読み取るバイト数を (Long型) で指定します。（もしくは、以下のEnumを指定）
+'
+' -----------+---+------------------------------------------------
+' 定数        値  説明
+' -----------+---+------------------------------------------------
+' adReadAll   -1  既定値。現在の位置から EOS マーカー方向に、すべてのバイトをストリームから読み取ります。
+' adReadLine  -2  ストリームから次の行を読み取ります (LineSeparator プロパティで指定)。
+' -----------+---+------------------------------------------------
+'
+' ※Enum を使用するには、ツールの参照設定で
+' Microsoft ActiveX Data Objects 6.1 Library にチェックを入れる必要あり。
 '------------------------------------------------------------------------------
 Public Function DictionaryFileLoad(fileName As String, code As String, separator As String) As Object
     Dim lines As Object
@@ -26,11 +39,11 @@ Public Function DictionaryFileLoad(fileName As String, code As String, separator
     
         Select Case separator
         Case vbLf:
-            .lineseparator = 10
+            .LineSeparator = 10
         Case vbCr:
-            .lineseparator = 13
+            .LineSeparator = 13
         Case Else:
-            .lineseparator = -1
+            .LineSeparator = -1
         End Select
         
         .Open
